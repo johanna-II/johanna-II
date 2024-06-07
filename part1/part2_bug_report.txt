@@ -1,0 +1,112 @@
+Part2. Bug Identify & Report
+
+### Severity of this function
+Critical
+- Desc.: Critical bugs severely impact the core functionality of the application, causing system crashes, data loss, or security vulnerabilities. The application is unusable or produces incorrect results.
+- i.e.
+    - Bug: The user registration function allows registration with missing required fields (username, password, email).
+    - Reason: Missing required fields can lead to incomplete or invalid user accounts, compromising the integrity of the system.
+
+High
+- Desc.: High severity bugs significantly affect the functionality or performance of the application. The application may operate, but with major limitations or degraded performance.
+- i.e.
+    - Bug: The user registration function doesn't properly validate the email format.
+    - Reason: Accepting invalid email formats can lead to issues with communication and account management.
+
+Medium
+- Desc.: Medium severity bugs affect non-critical functionality or cause minor usability issues. The application remains operational, but with some limitations or inconveniences.
+- i.e.
+    - Bug: The user registration function doesn't handle username uniqueness correctly.
+    - Reason: Duplicate usernames can cause confusion and issues with account identification.
+
+
+Low
+- Desc.:Low severity bugs have minimal impact on the application's functionality or usability. They may include minor cosmetic issues, typos, or non-critical enhancements.
+- i.e.
+    - Bug: The user registration function doesn't enforce a minimum password length.
+    - Reason: Short passwords can be easier to guess or brute-force, compromising account security.
+
+### Some bugs are here.
+
+# Bug 1
+Title: [FE] Console Error is appeared when I entered homepage.
+
+Severity: Low
+
+Test Procedure:
+1. Enter the homepage
+2. Open the Devtool in Chrome
+3. Check the console error
+
+Expect Result: There is no error in console.
+Actual Result: TypeError is occurred in Console.
+Console Log:
+TypeError: Cannot redefine property: StacksProvider
+    at Function.defineProperties (<anonymous>)
+    at inpage.js:1:8967
+    at inpage.js:1:11266
+
+
+# Bug 2
+Title: [FE] There is no validation popup with invalid email address. (ex. a@a)
+
+Severity: High
+
+Test Procedure:
+1. Enter the homepage
+2. Input the wrong email format (ex. a@a)
+3. Push the register button
+4. Check the validation popup
+
+Expect Result: Validation popup should be displayed and no allowance with it.
+Actual Result: There is no validation popup and allow invalid value.
+
+
+# Bug 3
+Title: [FE] There is no newsletter parameter when "Subscribe" checkbox is unchecked
+
+Severity: Low (Trivial)
+
+Test Procedure:
+1. Enter the homepage
+2. Input valid value in textfield (Username, Password, Email)
+3. Uncheck "Subscribe to newsletter" checkbox
+4. Push the register button
+5. Check the URL
+
+Expect Result: "newsletter" parameter should be sent as "off"
+Actual Result: There is no "newsletter" parameter with the URL.
+(I saw that "newsletter=on" sent when it was checked with registration.)
+Comment: Parameter should be clearly sent to BE unless default value is already set in code.
+
+
+# Bug 4
+Title: [FE/BE] User can register with duplicated username
+
+Severity: Medium
+
+Test Procedure:
+1. Enter the homepage
+2. Input valid information (ex. Username: aaaaa, Password: aaaaaaaa, Email: a@a.com)
+3. Push the register button
+4. Input the same information with second step
+5. Push the register button
+6. Check the validation
+
+Expect Result: Validation popup should be displayed and no allowance with it.
+Actual Result: There is no validation popup and allow duplicated user information.
+
+
+# Bug 5
+Title: [FE/BE] User information is exposed with the URL.
+
+Severity: Critical
+
+Test Procedure:
+1. Enter the homepage
+2. Input any information (ex. Username: aaaaa, Password: aaaaaaaa, Email: a@a.com)
+3. Push the register button
+4. Check the URL
+
+Expect Result: Any user's information should not be exposed with public.
+Actual Result: All of user's information are displayed with URL.
